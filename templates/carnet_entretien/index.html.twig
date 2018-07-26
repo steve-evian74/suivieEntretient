@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}CarnetEntretien index{% endblock %}
+{% block body %}
+    <h1> Entretient </h1>
+
+
+    {% if app.user %}
+        {% set id = app.user.id %}
+        id de la session :{{id}}
+        {% for carnet_entretient in carnet_entretiens  %}
+            {%if carnet_entretient.ficheVoiture.user.id == id%}
+                {{dump(carnet_entretient)}}
+                {{dump (carnet_entretient.typeIntervention)}}
+                Marque : {{carnet_entretient.ficheVoiture.marque}}<br/>
+                Modele : {{carnet_entretient.ficheVoiture.modele}}<br/>
+                Immatriculation : {{carnet_entretient.ficheVoiture.immatriculation}} <br/> 
+                Date d'intervention : {{carnet_entretient.dateIntervention|date("d/m/Y")}} <br/>
+                Commentaired d'intervention : {{carnet_entretient.commentaireIntervention}} <br/> 
+                Categorie d'intervention : {{carnet_entretient.commentaireIntervention}} <br/> 
+                Type d'intervention : {{carnet_entretient.typeIntervention.libelle}} <br/> 
+                {{dump(carnet_entretient.ficheVoiture.user.id)}}
+                <a href="{{ path('carnet_entretien_show', {'id': carnet_entretient.id}) }}">Cliquer pour en savoir plus</a>
+
+                {% set idUser = carnet_entretient.ficheVoiture.user.id %}
+
+
+                <!--<a href="{#{ path('carnet_entretien_edit', {'id': carnet_entretient.id}) }}">edit</a>
+                <a href="{{ path('carnet_entretien_new') }#}">Create new</a> -->
+            {%else %}
+                <p> aucun données </p>
+            {% endif %}     
+
+        {%endfor%}
+    {% endif %}    
+
+{% endblock %}

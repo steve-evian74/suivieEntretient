@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}FicheVoiture{% endblock %}
+
+{% block body %}
+    <div class="col-md-6 bloc_vente">
+        <div class="jumbotron  col-md-offset-1 col-md-11">
+            <h3>{{ fiche_voiture.marque }} {{ fiche_voiture.modele }} {{ fiche_voiture.kilometre }} km</h3>
+            <div class="col-md-3 ">
+                <div class="thumbnail ">
+                    <img src="https://img1.leboncoin.fr/ad-image/6604e883c238ff8f307dc7716286381917bd3794.jpg" alt="...">
+                    <img src="https://img1.leboncoin.fr/ad-image/6604e883c238ff8f307dc7716286381917bd3794.jpg" alt="...">
+                </div>
+            </div>
+        </div>
+        <div class="jumbotron  col-md-offset-1 col-md-11">
+            <h3>{{ fiche_voiture.description}}</h3>
+            <div class="col-md-3 ">
+                <div class="thumbnail ">
+                    <img src="https://img1.leboncoin.fr/ad-image/6604e883c238ff8f307dc7716286381917bd3794.jpg" alt="...">
+                    <img src="https://img1.leboncoin.fr/ad-image/6604e883c238ff8f307dc7716286381917bd3794.jpg" alt="...">
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <a href="{{ path('fiche_voiture_index') }}" class="btn btn-primary" role="button">Retour sur la page des annonces</a>
+
+
+    
+{% endblock %}

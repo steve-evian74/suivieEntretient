@@ -1,0 +1,59 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New CarnetEntretien{% endblock %}
+
+{% block body %}
+    <h1>Create new CarnetEntretien</h1>
+
+    {{ include('carnet_entretien/_form.html.twig') }}
+
+    <a href="{{ path('carnet_entretien_index') }}">back to list</a>
+
+
+    <form method="post" action="">
+        <input type="text" id="mot_cle">
+    </form>
+ 
+    
+    <div id="results">
+        <ul class="result">
+            {% for ville in villes %}
+                {{dump(ville)}}
+                {% endfor %}
+        </ul>
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            if (!jQuery('body').hasClass('searching')) {
+                $('#mot_cle').keyup(function (e) {
+                    var contenu = $('#mot_cle').val();
+                    $('#results').html('');
+                    if (contenu.length > 1) {
+                        jQuery('#results').addClass('miniload');
+                        jQuery('#results').append('<div id="chargement">Chargement...<div id="spinner" class="spinner"></div></div>');
+                        setTimeout(function () {
+                            $.ajax({
+                                type: 'POST',
+                                url: "{{ path('carnet_entretien_recherche') }}",
+                                data: 'mot_cle=' + contenu,
+                                success: function (data) {
+                                    jQuery('body').addClass('searching');
+                                    $('#results').html('');
+                                    jQuery('#chargement').remove();
+                                    $('#results').html(data);
+                                    return;
+                                },
+                                complete: function () {
+                                    jQuery('#chargement').remove();
+                                    return jQuery('body').removeClass('searching');
+                                }
+                            });
+                        }, 1000);
+                    }
+                });
+            }
+        });
+    </script>
+
+{% endblock %}

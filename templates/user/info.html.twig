@@ -1,0 +1,89 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}User index{% endblock %}
+
+{% block body %}
+    <div class="container">
+        {{dump(users)}}
+        <div class="infoPerso col-lg-">
+            <h1> Vos données personnels :</h1> 
+            <div class="champInfo">
+                <div class="">Votre nom et prénom </div>
+                <div class=""> {{ users.fullName }} </div>
+            </div> 
+            <div class="champInfo">
+                <div class="">Username </div>
+                <div class=""> {{ users.username }} </div>
+
+            </div> 
+            <div class="champInfo">
+                <div class="">Email </div>
+                <div class=""> {{ users.email }} </div>
+
+            </div>
+            <div class="champInfo">
+                <div class="">Nom </div>
+                <div class=""> {{ users.nom }} </div>
+
+            </div>
+            <div class="champInfo">
+                <div class="">Prenom </div>
+                <div class=""> {{ users.prenom }} </div>
+
+            </div>
+            <div class="champInfo">
+                <div class="">Adresse </div>
+                <div class=""> {{ users.adresse }} </div>
+
+            </div>
+            <div class="champInfo">
+                <div class="">CodePostale </div>
+                <div class=""> {{ users.codePostale }} </div>
+
+            </div>
+            <div class="champInfo">
+                <div class="">Ville </div>
+                <div class=""> {{ users.ville }} </div>
+
+            </div>
+            <div class="champInfo">
+                <div class="">TelFixe </div>
+                <div class=""> {{ users.telFixe }} </div>
+
+            </div>
+            <div class="champInfo">
+                <div class="">TelPortable </div>
+                <div class=""> {{ users.telPortable }} </div>
+
+            </div>
+            <div class="champInfo">
+                <div class="">NumeroSiret </div>
+                <div class=""> {{ users.numeroSiret }} </div>
+
+            </div>
+            <div class="champInfo">
+                <div class="">Logo </div>
+                <div class=""> {{ users.logo }} </div>
+
+            </div>
+            <div class="champInfo">
+                <div class="">Description </div>
+                <div class=""> {{ users.description }} </div>
+
+            </div>
+            <div class="champInfo">
+                <div class="">NomEntreprise </div>
+                <div class=""> {{ users.nomEntreprise }} </div>
+
+            </div>
+            <div class="champInfo">
+                <div class="">actions </div>
+                <div class=""> </div>
+
+            </div>
+        </div>
+    </div>
+
+
+
+{% endblock %}

@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}FicheVoiture index{% endblock %}
+
+{% block body %}
+
+    {% for fiche_voiture in fiche_voitures %}
+        {% if fiche_voiture.vente == true %}
+            
+            <div class="row">
+                <div class="col-sm-6 col-md-4">
+                    <div class="thumbnail">
+                        <img src="..." alt="...">
+                        <div class="caption">
+                            <h2> {{ fiche_voiture.marque }} {{ fiche_voiture.modele }} {{ fiche_voiture.kilometre }} km </h2>
+                            <ul>
+                                <li>Energie : {{ fiche_voiture.energie }}</li>
+                                <li>Puissance : {{ fiche_voiture.cvDigne }} </li>
+                                <li>Annee : {{ fiche_voiture.annee|date("d/m/Y") }}</li>
+                            </ul>
+                            <p><a href="/fiche/voiture/{{ fiche_voiture.id }}" class="btn btn-primary" role="button">Consulter</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+                       
+         
+        {% endif %}
+    {% else %}
+
+    {% endfor %}
+</tbody>
+</table>
+
+{% endblock %}

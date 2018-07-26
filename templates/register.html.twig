@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    <div class="col-sm-5 well">
+        {{ form_start(form) }}
+        {{ form_row(form.nom) }}
+        {{ form_row(form.prenom) }}
+        {{ form_row(form.adresse) }}
+        {{ form_row(form.codePostale) }}
+        {{ form_row(form.ville) }}
+        {{ form_row(form.telFixe) }}
+        {{ form_row(form.telPortable) }}
+        {{ form_row(form.numeroSiret) }}
+        {{ form_row(form.description) }}
+        {{ form_row(form.nomEntreprise) }}
+
+
+
+        {{ form_row(form.fullName) }}
+        {{ form_row(form.username) }}
+        {{ form_row(form.email) }}
+        {{ form_row(form.password.first) }}
+        {{ form_row(form.password.second) }}
+        {{ form_row(form.typeRoles) }}
+
+        <!-- <button type="submit">S'inscrire !</button> -->
+        <button type="submit" class="btn btn-primary">
+                            <i class="fa fa-sign-in" aria-hidden="true"></i> S'inscire
+                        </button>
+        {{ form_end(form) }}
+        
+    </div>
+
+{% endblock %}

@@ -1,0 +1,4 @@
+{# empty Twig template #}
+{% for image in images %}
+    <img src="{{ asset('uploads/images/' ~ image.image) }}" height="400" width="400">
+{%endfor%}

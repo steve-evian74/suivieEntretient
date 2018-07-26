@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}{% endblock %}</title>
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+        <script src="http://code.jquery.com/jquery-latest.pack.js"></script>
+        <script src="{{ asset('bootstrap/js/bootstrap.js') }}"></script>
+        <link href="{{ asset('bootstrap/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
+        <link href="{{ asset('css/style.css') }}" rel="stylesheet" type="text/css" />
+    {% block stylesheets %}{% endblock %}
+
+</head>
+<body>
+    {% block navigation %}
+        <nav class="navbar navbar-default" width="height">
+
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="/">
+                        <img alt="Brand" src="{{ asset('image/logo.png') }}"width="70">
+                    </a>
+                </div>
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav">
+                        <li><a href="/fiche/voiture">Les annonces</a></li>
+                        <li><a href="">Les garages</a></li>
+                            {% if app.user is empty %}
+                            <li><a href="{{ path('security_login')}}">Se Connecter</a></li>
+                            <li><a href="{{ path('user_registration')}}">S'Inscrire</a></li>
+                            {%else%}
+                                {% if is_granted('ROLE_PARTICULIER') %}
+                                <li><a href="{{ path('carnet_entretien_index')}}"/> Consulter les entretiens de la voiture</a> </li>
+
+                                <li> <a href="{{path('user_show_info',  {'id': app.user.id})}}"> Vous êtes {{ app.user.prenom}} {{ app.user.nom}}</a> </li>
+                                {% endif %}
+                                {% if is_granted('ROLE_GARAGISTE') %}
+                                <li><a href="{{ path('carnet_entretien_new')}}"/> Ajouter un intervention </a> </li>
+                                <li><a href=""> Vous êtes le garage de {{app.user.nomEntreprise}} </a> </li>
+                                {% endif %}
+
+
+                            <li><a href="{{ path('security_logout')}}">Se deconnecter</a></li>
+
+                        {% endif %}
+
+                    </ul>
+                </div><!-- /.navbar-collapse -->
+            </div><!-- /.container-fluid -->
+        </nav>
+    {% endblock %}
+    {% block body %}
+    {% endblock %}
+    {% block javascripts %}
+        <script src="{{ asset('bootstrap/js/bootstrap.js') }}"></script>
+        <script src="{{ asset('bootstrap/js/bootstrap.min.js') }}"></script>
+    {% endblock %}
+</body>
+</html>
