@@ -1,0 +1,71 @@
+<!-- ajax dans twig new de carnet entretien -->
+
+{% extends 'base.html.twig' %}
+
+{% block title %}New CarnetEntretien{% endblock %}
+
+{% block body %}
+    <h1>Create new CarnetEntretien</h1>
+
+    {{ include('carnet_entretien/_form.html.twig') }}
+
+    <a href="{{ path('carnet_entretien_index') }}">back to list</a>
+
+
+    <form method="post" action="">
+        <input type="text" id="id">
+        <input type="submit" id="bttn">
+    </form>
+    <div id="resultat"></div>
+
+    {% block javascripts %}
+        <script>
+            $(document).ready(function () {
+                $("#bttn").click(function (e) {
+                    e.preventDefault();
+                    var id = $('#id').val();
+                        $.ajax({
+                            type: 'POST',
+                            data: {id: id},
+                            url: '{{path('carnet_entretien_recherche')}}',
+                            dataType : 'html',
+                            success: function (data) {
+                                 var jsonObject = JSON.stringify(data)
+                                 
+                                 $('#resultat').html(jsonObject);
+                                
+                            },
+                            error: function () {
+                                console.log('attention');
+                            }
+                        });
+                        return false;
+                });
+            });
+        </script>
+    {%endblock%}
+
+
+{% endblock %}
+
+
+
+<!-- Le morceau de fonction dans controler --> 
+
+    /**
+     * @Route(name="carnet_entretien_recherche", methods="POST")
+     * @return JsonResponse
+     */
+    public function ajaxAction(Request $request, CarnetEntretienRepository $CarnetEntretienRepository): Response { {
+            if ($request->isXmlHttpRequest()) {
+                $id = $request->request->get('id');
+                $response = new JsonResponse();
+                $response->setData(array('som' => $CarnetEntretienRepository->find($id)));
+
+                return  $response ;
+            } else {
+                throw new \Exception("Erreur");
+            }
+        }
+    }
+
